@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Weather App</title>
-  <script src="./index.js" async></script>
-  <script src="./current-time.js" async></script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -18,11 +16,12 @@
     <div class="row">
       <input class="citySearch" type="text" placeholder="Search city" />
       <button class="search">Search</button>
+      <button class="currentLocation">currentLocation</button>
     </div>
     <div class="row">
       <div class="col currentCityScreen"></div>
-      <div class="col">123</div>
-      <div class="col">123</div>
+      <div class="col temperature">123</div>
+      <div class="col description">123</div>
     </div>
     <div class="row">
       <div class="col">123</div>
@@ -32,6 +31,9 @@
       <div class="col">123</div>
     </div>
   </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./current-time.js"></script>
+  <script src="./index.js"></script>
 </body>
 
 </html>
