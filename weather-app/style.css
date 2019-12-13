@@ -9,3 +9,14 @@
 a {
   float: right;
 }
+
+.temperature > div {
+  display: inline;
+}
+
+.fahrenheit,
+.celsius {
+  float: right;
+  border: none;
+  background-color: transparent;
+}

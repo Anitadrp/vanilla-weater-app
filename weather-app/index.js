@@ -17,14 +17,18 @@ function displayCity(event) {
 
 function setCity(city) {
   const apiKey = "3fceae23dde22994db28dbf0244f6a96";
-  let apiUrl;
+  let apiUrlWeather;
+  let apiUrlForcast;
   if ("id" in city) {
-    apiUrl = `https://api.openweathermap.org/data/2.5/weather?id=${city.id}&units=metric&appid=${apiKey}`;
+    apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?id=${city.id}&units=metric&appid=${apiKey}`;
+    apiUrlForcast = `https://api.openweathermap.org/data/2.5/forecast?id=${city.id}&units=metric&appid=${apiKey}`;
   } else {
-    apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&units=metric&appid=${apiKey}`;
+    apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&units=metric&appid=${apiKey}`;
+    apiUrlForcast = `https://api.openweathermap.org/data/2.5/forecast?q=${city.name}&units=metric&appid=${apiKey}`;
   }
 
-  axios.get(apiUrl).then(handleCityTemperature);
+  axios.get(apiUrlWeather).then(handleCityTemperature);
+  axios.get(apiUrlForcast).then(handleForcast);
 }
 
 function handleCityTemperature(response) {
@@ -34,27 +38,51 @@ function handleCityTemperature(response) {
   let cityTemperature = response.data.main.temp;
   currentTemperature = Math.round(cityTemperature);
   temperatureChange();
-  descriptionCurrentWeather(response);
+  statsCurrentWeather(response);
 }
 
 let currentTemperature = 0;
 let isCelcius = true;
 
+let temperature = document.querySelector(".temperature");
+let temperatureElement = document.createElement("div");
+temperature.appendChild(temperatureElement);
 function temperatureChange() {
-  let temperature = document.querySelector(".temperature");
   if (isCelcius) {
-    temperature.innerHTML = `${currentTemperature}˚C`;
+    temperatureElement.innerHTML = `${currentTemperature}˚C`;
   } else {
     let fahrenheitTemperature = Math.round(currentTemperature * (9 / 5) + 32);
-    temperature.innerHTML = `${fahrenheitTemperature}˚F`;
+    temperatureElement.innerHTML = `${fahrenheitTemperature}˚F`;
   }
 }
 
-function descriptionCurrentWeather(response) {
-  let description = document.querySelector(".description");
+let temperatureButtonElement = document.createElement("button");
+temperatureButtonElement.setAttribute("class", "fahrenheit");
+temperatureButtonElement.innerHTML = "°F";
+temperatureButtonElement.addEventListener("click", function() {
+  if (isCelcius) {
+    isCelcius = false;
+    temperatureButtonElement.setAttribute("class", "celsius");
+    temperatureButtonElement.textContent = "˚C";
+  } else {
+    isCelcius = true;
+    temperatureButtonElement.setAttribute("class", "fahrenheit");
+    temperatureButtonElement.textContent = "˚F";
+  }
+
+  temperatureChange();
+});
+
+temperature.appendChild(temperatureButtonElement);
+
+function statsCurrentWeather(response) {
+  let stats = document.querySelector(".stats");
+  let statsElements = document.createElement("div");
+  stats.appendChild(statsElements);
+
   const wind = response.data.wind.speed;
   const humidity = response.data.main.humidity;
-  description.innerHTML = `Wind speed: ${wind} m/s<br>Humidity: ${humidity} %`;
+  statsElements.innerHTML = `Wind speed: ${wind} m/s<br>Humidity: ${humidity} %`;
 }
 
 let search = document.querySelector("button");
@@ -87,6 +115,16 @@ function handleCurrentPosition(response) {
 
 let currentLocation = document.querySelector(".currentLocation");
 currentLocation.addEventListener("click", currentPosition);
+
+let currentCityForcast = document.querySelector(".forcast");
+let currentCityForcastElement = document.createElement("div");
+
+function handleForcast(response) {
+  let cityElement = currentCityForcastElement;
+  currentCityForcastElement.innerHTML = `${response.data.list[3].main.temp}<br> ${response.data.list[0].dt_txt}`;
+}
+
+currentCityForcast.appendChild(currentCityForcastElement);
 
 let body = document.querySelector("body");
 let gitLink = document.createElement("a");
