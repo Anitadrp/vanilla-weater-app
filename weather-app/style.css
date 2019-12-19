@@ -7,26 +7,11 @@
   padding: 5px 15px;
 }
 
-a {
-  float: right;
-  text-decoration: none;
-}
-
-.temperature > div {
-  display: inline;
-}
-
-/*.fahrenheit,
-.celsius {
-  float: right;
-  border: none;
-  background-color: transparent;
-}*/
 .search {
   margin: 0;
 }
 .citySearch {
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 0 10px;
 }
 
@@ -34,9 +19,35 @@ i {
   font-size: 16px;
   width: 16px;
 }
+.currentCity {
+  padding-top: 10px;
+}
 
-button {
-  background-color: red;
-  border-radius: 20px;
+.temperature {
+  font-size: 40px;
+}
+
+.temperature > div {
+  display: inline;
+}
+
+.fahrenheit,
+.celsius {
   border: none;
+  background-color: transparent;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+}
+/*button {
+  font-size: 12px;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid grey;
+  float: right;
+  margin: 10px;
+}*/
+a {
+  float: right;
+  text-decoration: none;
 }
