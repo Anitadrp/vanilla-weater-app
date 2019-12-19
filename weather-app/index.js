@@ -88,7 +88,7 @@ function statsCurrentWeather(response) {
   statsElements.innerHTML = `Wind speed: ${wind} m/s<br>Humidity: ${humidity} %`;
 }
 
-let search = document.querySelector(".search");
+let search = document.querySelector(".searchButton");
 search.addEventListener("click", displayCity);
 
 function currentPosition() {
