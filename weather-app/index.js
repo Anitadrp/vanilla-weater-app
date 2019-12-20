@@ -1,6 +1,6 @@
 function displayCity(event) {
   event.preventDefault();
-  const citySearch = document.querySelector(".citySearch"); //search-bar
+  const citySearch = document.querySelector(".citySearch");
   const city = { name: citySearch.value };
   citySearch.value = "";
 
@@ -93,7 +93,14 @@ function statsCurrentWeather(response) {
 
   const wind = response.data.wind.speed;
   const humidity = response.data.main.humidity;
-  statsElements.innerHTML = `Wind speed: ${wind} m/s<br>Humidity: ${humidity} %`;
+  const description = response.data.weather[0].main;
+  const realFeel = Math.round(response.data.main.feels_like);
+  statsElements.innerHTML = `
+    <span class="description">${description}</span><br>
+    Wind speed: <span class="largeValue">${wind} m/s</span><br>
+    Humidity: <span class="largeValue">${humidity} %</span><br>
+    Feels like: <span class="largeValue">${realFeel}˚C</span>
+  `;
 }
 
 let search = document.querySelector(".searchButton");
@@ -126,7 +133,14 @@ function handlecurrentCityForecast(response) {
   for (let i = 0; i < 6; i++) {
     const currentCityForecastElement = document.createElement("div");
     currentCityForecastElement.setAttribute("class", "col");
-    currentCityForecastElement.innerHTML = `${response.data.list[i].main.temp}˚C<br> ${response.data.list[i].dt_txt}<br> <img src="https://openweathermap.org/img/wn/${response.data.list[i].weather[0].icon}@2x.png" />`;
+    let forecastTemperature = Math.round(response.data.list[i].main.temp);
+    let forecastTime = response.data.list[i].dt_txt;
+    currentCityForecastElement.innerHTML = `${forecastTemperature}˚C<br> ${forecastTime.slice(
+      11,
+      16
+    )}<br> <img src="https://openweathermap.org/img/wn/${
+      response.data.list[i].weather[0].icon
+    }@2x.png" />`;
 
     currentCityForecast.appendChild(currentCityForecastElement);
   }
