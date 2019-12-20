@@ -23,6 +23,10 @@ i {
   padding-top: 10px;
 }
 
+.currentCityScreen > p {
+  font-size: 12px;
+}
+
 .temperature {
   font-size: 40px;
 }
@@ -38,6 +42,11 @@ i {
   font-size: 12px;
   position: absolute;
   top: 0;
+}
+
+.stats {
+  display: flex;
+  margin: auto;
 }
 /*button {
   font-size: 12px;

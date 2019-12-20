@@ -55,6 +55,14 @@ function temperatureChange() {
     let fahrenheitTemperature = Math.round(currentTemperature * (9 / 5) + 32);
     temperatureElement.innerHTML = `${fahrenheitTemperature}˚F`;
   }
+
+  if (temperature.children.length > 2) {
+    temperature.removeChild(temperature.children[2]);
+  }
+
+  const currentCityIcon = new Image();
+  currentCityIcon.src = `https://openweathermap.org/img/wn/${currentWeather.data.weather[0].icon}@2x.png`;
+  temperature.appendChild(currentCityIcon);
 }
 
 let temperatureButtonElement = document.createElement("button");
@@ -118,7 +126,7 @@ function handlecurrentCityForecast(response) {
   for (let i = 0; i < 6; i++) {
     const currentCityForecastElement = document.createElement("div");
     currentCityForecastElement.setAttribute("class", "col");
-    currentCityForecastElement.innerHTML = `${response.data.list[i].main.temp}˚C<br> ${response.data.list[i].dt_txt}<br> <img src="http://openweathermap.org/img/wn/${response.data.list[i].weather[0].icon}@2x.png" />`;
+    currentCityForecastElement.innerHTML = `${response.data.list[i].main.temp}˚C<br> ${response.data.list[i].dt_txt}<br> <img src="https://openweathermap.org/img/wn/${response.data.list[i].weather[0].icon}@2x.png" />`;
 
     currentCityForecast.appendChild(currentCityForecastElement);
   }
