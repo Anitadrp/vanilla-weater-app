@@ -32,5 +32,10 @@ function displayTime() {
   ];
   let month = months[date.getMonth()];
 
-  currentTime.innerHTML = `${day}, ${date.getDate()} ${month} ${date.getFullYear()}<br>${date.toLocaleTimeString()}`;
+  currentTime.innerHTML = `
+    ${day}, ${date.getDate()} ${month} ${date.getFullYear()}<br>
+    ${String(100 + date.getHours()).substring(1)}:${String(
+    100 + date.getMinutes()
+  ).substring(1)}
+  `;
 }

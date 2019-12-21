@@ -21,14 +21,14 @@ i {
   font-size: 16px;
   width: 16px;
 }
+
 .currentCity {
   padding-top: 10px;
 }
 
-.currentCityScreen > p {
-  font-size: 12px;
+h1 {
+  font-weight: 900;
 }
-
 .temperature {
   font-size: 40px;
   text-align: center;
@@ -60,14 +60,12 @@ i {
 .largeValue {
   font-size: 16px;
 }
-/*button {
-  font-size: 12px;
-  background-color: transparent;
-  border-radius: 5px;
-  border: 1px solid grey;
-  float: right;
-  margin: 10px;
-}*/
+
+.forecast {
+  padding: 10px;
+  text-align: center;
+}
+
 a {
   float: right;
   text-decoration: none;
